@@ -1,59 +1,57 @@
-
 // Fonts
 @import url("https://fonts.googleapis.com/css?family=Raleway:300,400,600");
-
 // Variables
 @import "variables";
-
 // Bootstrap
 @import "~bootstrap-sass/assets/stylesheets/bootstrap";
 
 // 通用样式
 body {
-    font-family: Hiragino Sans GB, "Hiragino Sans GB", Helvetica, "Microsoft YaHei", Arial,sans-serif;
+  font-family: Hiragino Sans GB, "Hiragino Sans GB", Helvetica, "Microsoft YaHei", Arial, sans-serif;
 }
 
 /* 顶部导航 */
 
 .navbar-static-top {
-    border-color: #e7e7e7;
-    background-color: #fff;
-    box-shadow: 0px 1px 11px 2px rgba(42, 42, 42, 0.1);
-    border-top: 4px solid #00b5ad;
-    margin-bottom: 40px;
-    margin-top: 0px;
+  border-color: #e7e7e7;
+  background-color: #fff;
+  box-shadow: 0px 1px 11px 2px rgba(42, 42, 42, 0.1);
+  border-top: 4px solid #00b5ad;
+  margin-bottom: 40px;
+  margin-top: 0px;
 }
 
 /* 底部样式 */
 html {
-    position: relative;
-    min-height: 100% ;
+  position: relative;
+  min-height: 100%;
 }
+
 body {
-    margin-bottom: 60px;
+  margin-bottom: 60px;
 }
 
 .footer {
-    position: absolute;
-    bottom: 0;
-    width: 100% ;
-    /* Set the fixed height of the footer here */
-    height: 60px;
-    background-color: #000;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 60px;
+  background-color: #000;
 
-    .container {
-        padding-right: 15px;
-        padding-left: 15px;
+  .container {
+    padding-right: 15px;
+    padding-left: 15px;
 
-        p {
-            margin: 19px 0;
-            color: #c1c1c1;
+    p {
+      margin: 19px 0;
+      color: #c1c1c1;
 
-            a {
-                color: inherit;
-            }
-        }
+      a {
+        color: inherit;
+      }
     }
+  }
 }
 
 .products-index-page, .products-favorites-page {
@@ -104,7 +102,7 @@ body {
             color: #38b;
             font-weight: bold;
           }
-          &>div {
+          & > div {
             &:first-child {
               border-right: 1px solid #eee;
             }
@@ -141,7 +139,7 @@ body {
   .filters {
     font-size: 12px;
     margin-bottom: 10px;
-    &>.row {
+    & > .row {
       border-bottom: 1px solid #eee;
       .filter-key {
         width: 150px;
@@ -207,8 +205,8 @@ body {
     display: flex;
     flex-direction: row;
     font-size: 12px;
-    &>div {
-      &.sold_count,&.review_count {
+    & > div {
+      &.sold_count, &.review_count {
         border-right: 1px dotted #c9c9c9;
       }
       width: 33%;
@@ -221,7 +219,7 @@ body {
     }
   }
   .skus {
-    &>label {
+    & > label {
       color: #999;
       font-size: 12px;
       padding: 0 10px 0 10px;
@@ -268,7 +266,7 @@ body {
     padding-left: 44px;
   }
 
-  .product-detail  {
+  .product-detail {
     .nav.nav-tabs > li > a {
       border-radius: 0 !important;
     }
@@ -425,7 +423,7 @@ body {
   }
   .order-summary {
     width: 50%;
-    font-family: Verdana,Tahoma,Helvetica,Arial;
+    font-family: Verdana, Tahoma, Helvetica, Arial;
     .total-amount {
       font-weight: bolder;
       font-size: 14px;
@@ -484,7 +482,7 @@ body {
       & > input {
         position: absolute;
         top: -9999px;
-        clip: rect(0,0,0,0);
+        clip: rect(0, 0, 0, 0);
       }
       & > label {
         float: right;
@@ -520,5 +518,43 @@ body {
 
   textarea {
     border-radius: 0px;
+  }
+}
+
+.dropdown-submenu {
+  position: relative;
+  & > .dropdown-menu {
+    top: 0;
+    left: 100%;
+    margin-top: -6px;
+    margin-left: -1px;
+    border-radius: 0 6px 6px 6px;
+  }
+  &:hover > .dropdown-menu {
+    display: block;
+  }
+  & > a:after {
+    display: block;
+    content: " ";
+    float: right;
+    width: 0;
+    height: 0;
+    border-color: transparent;
+    border-style: solid;
+    border-width: 5px 0 5px 5px;
+    border-left-color: #ccc;
+    margin-top: 5px;
+    margin-right: -10px;
+  }
+  &:hover > a:after {
+    border-left-color: #fff;
+  }
+  &.pull-left {
+    float: none;
+    & > .dropdown-menu {
+      left: -100%;
+      margin-left: 10px;
+      border-radius: 6px 0 6px 6px;
+    }
   }
 }
