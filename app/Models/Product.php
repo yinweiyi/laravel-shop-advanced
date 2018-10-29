@@ -55,6 +55,18 @@ class Product extends Model
     }
 
     /**
+     * 按id
+     *
+     * @param $query
+     * @param $ids
+     * @return mixed
+     */
+    public function scopeByIds($query, $ids)
+    {
+        return $query->whereIn('id', $ids)->orderByRaw(sprintf("FIND_IN_SET(id, '%s')", join(',', $ids)));
+    }
+
+    /**
      * 获取属性
      *
      * @return mixed
