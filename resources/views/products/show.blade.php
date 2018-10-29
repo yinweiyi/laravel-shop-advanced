@@ -109,15 +109,30 @@
                     </div>
                     <div class="product-detail">
                         <ul class="nav nav-tabs" role="tablist">
-                            <li role="presentation" class="active"><a href="#product-detail-tab"
-                                                                      aria-controls="product-detail-tab" role="tab"
-                                                                      data-toggle="tab">商品详情</a></li>
+                            <li role="presentation" class="active">
+                                <a href="#product-detail-tab" aria-controls="product-detail-tab" role="tab" data-toggle="tab">
+                                    商品详情
+                                </a>
+                            </li>
                             <li role="presentation"><a href="#product-reviews-tab" aria-controls="product-reviews-tab"
                                                        role="tab" data-toggle="tab">用户评价</a></li>
                         </ul>
                         <div class="tab-content">
                             <div role="tabpanel" class="tab-pane active" id="product-detail-tab">
-                                {!! $product->description !!}
+                                <!-- 产品属性开始 -->
+                                <div class="properties-list">
+                                    <div class="properties-list-title">产品参数：</div>
+                                    <ul class="properties-list-body">
+                                        @foreach($product->grouped_properties as $name => $values)
+                                            <li>{{ $name }}：{{ join(' ', $values) }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                                <!-- 产品属性结束 -->
+                                <!-- 在商品描述外面包了一层 div -->
+                                <div class="product-description">
+                                    {!! $product->description !!}
+                                </div>
                             </div>
                             <div role="tabpanel" class="tab-pane" id="product-reviews-tab">
                                 <!-- 评论列表开始 -->
