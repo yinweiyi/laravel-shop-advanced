@@ -10,10 +10,13 @@ class Product extends Model
 {
     const TYPE_NORMAL = 'normal';
     const TYPE_CROWDFUNDING = 'crowdfunding';
+    const TYPE_SECKILL = 'seckill';
     public static $typeMap = [
         self::TYPE_NORMAL => '普通商品',
         self::TYPE_CROWDFUNDING => '众筹商品',
+        self::TYPE_SECKILL => '秒杀商品'
     ];
+
     protected $fillable = ['title', 'long_title', 'description', 'image', 'on_sale', 'rating', 'sold_count', 'review_count', 'price', 'type'];
     protected $casts = [
         'on_sale' => 'boolean', // on_sale 是一个布尔类型的字段
@@ -82,6 +85,12 @@ class Product extends Model
             });
     }
 
+    //秒杀商品
+    public function seckill()
+    {
+        return $this->hasOne(SeckillProduct::class);
+    }
+
     public function toESArray()
     {
         // 只取出需要的字段
@@ -111,7 +120,7 @@ class Product extends Model
         // 只取出需要的商品属性字段
         $arr['properties'] = $this->properties->map(function (ProductProperty $property) {
             return array_merge(array_only($property->toArray(), ['name', 'value']), [
-                'search_value' => $property->name.':'.$property->value,
+                'search_value' => $property->name . ':' . $property->value,
             ]);
         });
 
