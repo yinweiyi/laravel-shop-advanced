@@ -3,6 +3,7 @@
 namespace App\Console\Commands\Elasticsearch;
 
 use App\Console\Commands\Elasticsearch\Indices\ProjectIndex;
+use Elasticsearch\Client;
 use Illuminate\Console\Command;
 
 class Migrate extends Command
@@ -22,6 +23,13 @@ class Migrate extends Command
     protected $description = 'Elasticsearch 索引结构迁移';
 
     /**
+     * es
+     *
+     * @var Client
+     */
+    protected $es;
+
+    /**
      * Create a new command instance.
      *
      * @return void
@@ -29,6 +37,7 @@ class Migrate extends Command
     public function __construct()
     {
         parent::__construct();
+        $this->es = app('es');
     }
 
     /**
@@ -38,8 +47,6 @@ class Migrate extends Command
      */
     public function handle()
     {
-        $this->es = app('es');
-        // 索引类数组，先留空
         $indices = [Indices\ProjectIndex::class];
         // 遍历索引类数组
         foreach ($indices as $indexClass) {
