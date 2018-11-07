@@ -229,6 +229,7 @@ return [
 
     ],
 
+    //普通订单关闭时间
     'order_ttl' => 1800,
 
     'ngrok_url' => env('NGROK_URL'),
@@ -240,4 +241,6 @@ return [
     ], // 分期费率，key 为期数，value 为费率
     'min_installment_amount' => 300, // 最低分期金额
     'installment_fine_rate' => 0.05, // 逾期日息 0.05%
+    //秒杀订单关闭时间
+    'seckill_order_ttl' => 600,
 ];

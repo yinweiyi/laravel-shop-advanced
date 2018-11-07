@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CrowdFundingOrderRequest;
+use App\Http\Requests\SeckillOrderRequest;
 use App\Http\Requests\SendReviewRequest;
 use App\Exceptions\InvalidRequestException;
 use App\Http\Requests\OrderRequest;
@@ -54,6 +55,15 @@ class OrdersController extends Controller
         return $orderService->store($user, $address, $request->input('remark'), $request->input('items'), $coupon);
     }
 
+    /**
+     * 确认收货
+     *
+     * @param Order $order
+     * @param Request $request
+     * @return Order
+     * @throws InvalidRequestException
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
     public function received(Order $order, Request $request)
     {
         // 校验权限
@@ -70,6 +80,14 @@ class OrdersController extends Controller
         return $order;
     }
 
+    /**
+     * 评价页面
+     *
+     * @param Order $order
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @throws InvalidRequestException
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
     public function review(Order $order)
     {
         // 校验权限
@@ -81,7 +99,16 @@ class OrdersController extends Controller
         // 使用 load 方法加载关联数据，避免 N + 1 性能问题
         return view('orders.review', ['order' => $order->load(['items.productSku', 'items.product'])]);
     }
-    
+
+    /**
+     * 评价
+     *
+     * @param Order $order
+     * @param SendReviewRequest $request
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws InvalidRequestException
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
     public function sendReview(Order $order, SendReviewRequest $request)
     {
         // 校验权限
@@ -151,5 +178,21 @@ class OrdersController extends Controller
         $amount  = $request->input('amount');
 
         return $orderService->crowdfunding($user, $address, $sku, $amount);
+    }
+
+    /**
+     * 秒杀
+     *
+     * @param SeckillOrderRequest $request
+     * @param OrderService $orderService
+     * @return mixed
+     */
+    public function seckill(SeckillOrderRequest $request, OrderService $orderService)
+    {
+        $user    = $request->user();
+        $address = UserAddress::find($request->input('address_id'));
+        $sku     = ProductSku::find($request->input('sku_id'));
+
+        return $orderService->seckill($user, $address, $sku);
     }
 }
